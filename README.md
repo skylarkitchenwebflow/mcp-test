@@ -1,39 +1,90 @@
-# MCP Test Project
+# Task Manager API
 
-This repository serves as a test project for demonstrating GitHub functionality and project organization.
+A simple Flask-based REST API for managing tasks.
 
-## Project Structure
+## Features
 
-```
-.
-├── README.md
-├── src/
-│   └── main.py
-├── tests/
-│   └── test_main.py
-└── .gitignore
-```
+- Create, read, update, and delete tasks
+- SQLite database with SQLAlchemy ORM
+- RESTful API endpoints
+- Environment configuration
 
-## Getting Started
+## Setup
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/skylarkitchenwebflow/mcp-test.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
    cd mcp-test
    ```
 
-## Contributing
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+   ```
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configurations
+   ```
+
+5. Run the application:
+   ```bash
+   python run.py
+   ```
+
+## API Endpoints
+
+### Get all tasks
+```
+GET /tasks
+```
+
+### Create a task
+```
+POST /tasks
+Content-Type: application/json
+
+{
+    "title": "Task title",
+    "description": "Task description"
+}
+```
+
+### Update a task
+```
+PUT /tasks/<task_id>
+Content-Type: application/json
+
+{
+    "title": "Updated title",
+    "description": "Updated description",
+    "completed": true
+}
+```
+
+### Delete a task
+```
+DELETE /tasks/<task_id>
+```
+
+## Testing
+
+You can test the API using curl or any API testing tool like Postman.
+
+Example curl command:
+```bash
+curl -X POST http://localhost:5000/tasks \
+    -H "Content-Type: application/json" \
+    -d '{"title": "My first task", "description": "This is a test task"}'
+```
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License
